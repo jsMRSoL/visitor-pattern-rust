@@ -79,14 +79,14 @@ impl ComputerPartVisitor for ComputerPartDisplayVisitor {
     }
 }
 
-struct ComputerPartSausageVisitor;
-impl ComputerPartVisitor for ComputerPartSausageVisitor {
+struct ComputerPartShutdownVisitor;
+impl ComputerPartVisitor for ComputerPartShutdownVisitor {
     fn visit(&self, computer_part: &dyn ComputerPart) {
         match computer_part.as_any() {
-            mouse if mouse.is::<Mouse>() => println!("Displaying Mouse...Sausage!"),
-            keyboard if keyboard.is::<Keyboard>() => println!("Displaying Keyboard...Sausage!"),
-            monitor if monitor.is::<Monitor>() => println!("Displaying Monitor...Sausage!"),
-            computer if computer.is::<Computer>() => println!("Displaying Computer...Sasausage!"),
+            mouse if mouse.is::<Mouse>() => println!("Shutting down Mouse...!"),
+            keyboard if keyboard.is::<Keyboard>() => println!("Shutting down Keyboard...!"),
+            monitor if monitor.is::<Monitor>() => println!("Shutting down Monitor...!"),
+            computer if computer.is::<Computer>() => println!("Shutting down Computer...!"),
             _ => eprintln!("Nothing found..."),
         }
     }
@@ -95,5 +95,5 @@ impl ComputerPartVisitor for ComputerPartSausageVisitor {
 fn main() {
     let computer = Computer::new();
     computer.accept(&ComputerPartDisplayVisitor);
-    computer.accept(&ComputerPartSausageVisitor);
+    computer.accept(&ComputerPartShutdownVisitor);
 }
